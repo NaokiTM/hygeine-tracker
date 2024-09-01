@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 const server = express();
 
+
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -22,27 +23,27 @@ server.set('view engine', 'ejs');
 // Middleware to parse request bodies
 server.use(express.urlencoded({ extended: true }));
 
-// Define the schema and model for hygiene records
-const hygieneSchema = new mongoose.Schema({
-    date: { type: Date, default: Date.now },
-    activity: String,
-    duration: Number,
-    notes: String,
+// Define the schema and model for clothing records
+const clothingSchema = new mongoose.Schema({
+    brand: String,
+    type: String,
+    size: String,
+    clean: Boolean,
 });
 
-const Hygiene = mongoose.model('Hygiene', hygieneSchema);
+const Clothing = mongoose.model('Clothing', clothingSchema);
 
-// Route to display the hygiene records
+// Route to display the clothing records
 server.get('/', async (req, res) => {
-    const records = await Hygiene.find({});
-    res.render('index', { records });
+    const clothingRecords = await Clothing.find({});
+    res.render('index', { clothingRecords });
 });
 
-// Route to add a new hygiene record
-server.post('/add', async (req, res) => {
-    const { activity, duration, notes } = req.body;
-    const newRecord = new Hygiene({ activity, duration, notes });
-    await newRecord.save();
+// Route to add a new clothing record
+server.post('/addClothing', async (req, res) => {
+    const { brand, type, size, clean } = req.body;
+    const newClothingRecord = new Clothing({ brand, type, size, clean });
+    await newClothingRecord.save();
     res.redirect('/');
 });
 

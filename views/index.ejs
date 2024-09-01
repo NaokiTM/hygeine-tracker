@@ -8,39 +8,56 @@
 <body>
     <h1>Hygiene Tracker</h1>
 
-    <form action="/add" method="POST">
-        <label for="activity">Activity:</label>
-        <input type="text" name="activity" id="activity" required><br>
-
-        <label for="duration">Duration (minutes):</label>
-        <input type="number" name="duration" id="duration" required><br>
-
-        <label for="notes">Notes:</label>
-        <textarea name="notes" id="notes"></textarea><br>
-
-        <button type="submit">Add Record</button>
+    <h2>Clothing:</h2>
+    <form action="/addClothing" method="POST">
+        <div>
+            <label for="name">Clothing Brand:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="type">Clothing Type:</label>
+            <input type="text" id="type" name="type" required>
+        </div>
+        <div>
+            <label for="size">Clothing Size:</label>
+            <input type="text" id="size" name="size" required>
+        </div>
+        <div>
+            <label for="clean">Is the clothing clean?</label>
+            <input type="checkbox" id="clean" name="clean" value="true">
+        </div>
+        <div>
+            <button type="submit">Add Clothing</button>
+        </div>
     </form>
 
-    <h2>Records</h2>
+    <h2>Clothing records:</h2>
     <table>
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Activity</th>
-                <th>Duration</th>
-                <th>Notes</th>
+                <th>Brand</th>
+                <th>Type</th>
+                <th>Size</th>
+                <th>Clean?</th>
             </tr>
         </thead>
         <tbody>
-            <% records.forEach(record => { %>
+            <% clothingRecords.forEach(record => { %>
                 <tr>
-                    <td><%= record.date.toDateString() %></td>
-                    <td><%= record.activity %></td>
-                    <td><%= record.duration %></td>
-                    <td><%= record.notes %></td>
+                    <td><%= record.brand %></td>
+                    <td><%= record.type %></td>
+                    <td><%= record.size %></td>
+                    <td><%= record.clean%></td>
                 </tr>
             <% }) %>
         </tbody>
     </table>
 </body>
 </html>
+
+<!-- add clothing: 
+ form (unique name / id, type)
+ submit button 
+ 
+ (table to view clothing name, type, and whether its clean or not.)
+ -->
