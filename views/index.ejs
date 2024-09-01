@@ -3,9 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hygeine tracker</title>
+    <title>Hygiene Tracker</title>
 </head>
 <body>
-    hi
+    <h1>Hygiene Tracker</h1>
+
+    <form action="/add" method="POST">
+        <label for="activity">Activity:</label>
+        <input type="text" name="activity" id="activity" required><br>
+
+        <label for="duration">Duration (minutes):</label>
+        <input type="number" name="duration" id="duration" required><br>
+
+        <label for="notes">Notes:</label>
+        <textarea name="notes" id="notes"></textarea><br>
+
+        <button type="submit">Add Record</button>
+    </form>
+
+    <h2>Records</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Activity</th>
+                <th>Duration</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% records.forEach(record => { %>
+                <tr>
+                    <td><%= record.date.toDateString() %></td>
+                    <td><%= record.activity %></td>
+                    <td><%= record.duration %></td>
+                    <td><%= record.notes %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
 </body>
 </html>
