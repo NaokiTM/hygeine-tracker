@@ -1,3 +1,13 @@
 body {
-    background-color: black;
+    background-color: blanchedalmond;
+}
+
+#clothingTable {
+    border-collapse: collapse; /* Ensures borders are not doubled */
+    width: 100%; /* Optional: makes the table full width */
+}
+
+th, td {
+    border: 1px solid black; /* Adds a black border around each cell */
+    text-align: center;
 }
