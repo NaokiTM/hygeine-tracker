@@ -4,6 +4,8 @@ const PORT = process.env.PORT || 3000;
 const express = require('express');
 const mongoose = require('mongoose');
 
+const path = require('path');
+
 const server = express();
 
 
@@ -19,6 +21,9 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 // Set up EJS as the view engine
 server.set('view engine', 'ejs');
+
+// Serve static files (e.g., CSS) from the root directory
+server.use(express.static(path.join(__dirname)));
 
 // Middleware to parse request bodies
 server.use(express.urlencoded({ extended: true }));
