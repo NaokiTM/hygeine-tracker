@@ -1,11 +1,10 @@
 require('dotenv').config();
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 const express = require('express');
 const mongoose = require('mongoose');
 
 const path = require('path');
-
 const server = express();
 
 
@@ -19,10 +18,10 @@ mongoose.connect(process.env.MONGODB_URI, {
     console.error('MongoDB connection error:', error);
 });
 
-// Set up EJS as the view engine
+// Set up EJS as the view engine, and telling the server to serve static files(css) to the user, because usually for a html and css project without node js, 
+// the live server option is used to create a temporary server on the chosen port, that automatically serves all the static files. 
+// because you're running your own server, you need to specify what files to serve, because its not done automatically :)
 server.set('view engine', 'ejs');
-
-// Serve static files (e.g., CSS) from the root directory
 server.use(express.static(path.join(__dirname)));
 
 // Middleware to parse request bodies
@@ -36,6 +35,7 @@ const clothingSchema = new mongoose.Schema({
     clean: Boolean,
 });
 
+//defines model for clothing records
 const Clothing = mongoose.model('Clothing', clothingSchema);
 
 // Route to display the clothing records
@@ -52,6 +52,7 @@ server.post('/addClothing', async (req, res) => {
     res.redirect('/');
 });
 
+// route to delete clothing records
 server.post('/deleteClothing', async (req, res) => {
     try {
         const clothingId = req.body.clothingId;  // Get the clothing ID from the form submission
