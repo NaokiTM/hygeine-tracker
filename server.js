@@ -47,6 +47,17 @@ server.post('/addClothing', async (req, res) => {
     res.redirect('/');
 });
 
+server.post('/deleteClothing', async (req, res) => {
+    try {
+        const clothingId = req.body.clothingId;  // Get the clothing ID from the form submission
+        await Clothing.findByIdAndDelete(clothingId);  // Delete the item from the database
+        res.redirect('/');  // Redirect back to the main page after deletion
+    } catch (error) {
+        console.error('Error deleting clothing item:', error);
+        res.status(500).send('Error deleting clothing item');
+    }
+})
+
 // Start the server
 server.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

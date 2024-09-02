@@ -9,6 +9,7 @@
     <h1>Hygiene Tracker</h1>
 
     <h2>Clothing:</h2>
+    <h3>Add clothing:</h3>
     <form action="/addClothing" method="POST">
         <div>
             <label for="name">Clothing Brand:</label>
@@ -29,6 +30,16 @@
         <div>
             <button type="submit">Add Clothing</button>
         </div>
+    </form>
+    <h3>Delete Clothing</h3>
+    <form action="/deleteClothing" method="POST">
+        <label for="clothingSelect">Select Clothing Item to Delete:</label>
+        <select id="clothingSelect" name="clothingId">
+            <% clothingRecords.forEach(function(item) { %>
+                <option value="<%= item._id %>"><%= item.name %></option>
+            <% }); %>
+        </select>
+        <button type="submit">Delete</button>
     </form>
 
     <h2>Clothing records:</h2>
